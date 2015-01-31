@@ -17,14 +17,22 @@
         android:password="false"
         />
 
+    <ImageView
+        android:layout_width="168dp"
+        android:layout_height="236dp"
+        android:id="@+id/imageView"
+        android:background="@drawable/rhapp_logo"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+id/titleText"
+        android:gravity="bottom"
+        android:layout_below="@+id/imageView"
         android:layout_alignLeft="@+id/titleText"
-        android:layout_alignStart="@+id/titleText"
-        android:gravity="bottom">
+        android:layout_alignStart="@+id/titleText">
 
         <EditText
             android:layout_width="match_parent"
