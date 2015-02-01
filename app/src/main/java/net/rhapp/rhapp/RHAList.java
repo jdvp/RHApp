@@ -1,15 +1,9 @@
 package net.rhapp.rhapp;
 
-import android.app.Activity;
-import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
-import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,7 +19,6 @@ public class RHAList extends ActionBarActivity {
 
     private String collegeSelection;
     private List<Map<String, String>> practiceList;
-    private SimpleAdapter simpleAdpt;
     private ListView rhaList;
 
     private ArrayList<String> names;
@@ -129,7 +122,7 @@ public class RHAList extends ActionBarActivity {
 
             // temporary: displays a message
             Context context = getApplicationContext();
-            CharSequence text = "Send message to " + ((String) parent.getItemAtPosition(position));
+            CharSequence text = "Send message to " + (parent.getItemAtPosition(position));
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -164,26 +157,25 @@ public class RHAList extends ActionBarActivity {
         colleges = new ArrayList<>();
         images = new ArrayList<>();
 
-        practiceList.add(dummyID("Wiess", "Jess", R.drawable.ic_launcher));
-        practiceList.add(dummyID("Wiess", "GaYoung", R.drawable.ic_launcher));
-        practiceList.add(dummyID("Duncan", "Karan", R.drawable.logo));
+        practiceList.add(dummyID("Wiess", "Jessica Dawson", R.drawable.empty_rha_img));
+        practiceList.add(dummyID("Wiess", "GaYoung Park", R.drawable.empty_rha_img));
+        practiceList.add(dummyID("Duncan", "Karan Thakker", R.drawable.empty_rha_img));
     }
 
     // filters the list of RHAs by college
-    private List<Map<String, String>> filteredPracticeList() {
-
-        List<Map<String, String>> filtered = new ArrayList<>();
-
-        for (Map<String, String> map : practiceList) {
-
-            if (collegeSelection.equals("All Colleges") ||
-                    map.get("college").equals(collegeSelection))
-                filtered.add(map);
-        }
-
-        return filtered;
-
-    }
+//    private List<Map<String, String>> filteredPracticeList() {
+//
+//        List<Map<String, String>> filtered = new ArrayList<>();
+//
+//        for (Map<String, String> map : practiceList) {
+//
+//            if (collegeSelection.equals("All Colleges") ||
+//                    map.get("college").equals(collegeSelection))
+//                filtered.add(map);
+//        }
+//
+//        return filtered;
+//    }
 
     private ArrayList<Integer> extractIndices (ArrayList<String> colleges, String collegeSelection) {
         ArrayList<Integer> indices = new ArrayList<>();
