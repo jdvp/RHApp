@@ -21,8 +21,7 @@ public class RHAList extends ActionBarActivity {
     private List<Map<String, String>> practiceList;
     private ListView rhaList;
 
-    private ArrayList<String> names;
-    private ArrayList<String> colleges;
+    private ArrayList<String> names, colleges, rooms;
     private ArrayList<Integer> images;
 
     @Override
@@ -51,7 +50,7 @@ public class RHAList extends ActionBarActivity {
         // ignore this crap
 //        CustomList adapter = new CustomList(RHAList.this, web, web2, imageId);
 
-        CustomList adapter = new CustomList(RHAList.this, collegeSelection, names, colleges, images);
+        CustomList adapter = new CustomList(RHAList.this, collegeSelection, names, colleges, rooms, images);
         rhaList.setAdapter(adapter);
 
     }
@@ -105,7 +104,7 @@ public class RHAList extends ActionBarActivity {
             ArrayList<Integer> indices = extractIndices(colleges, collegeSelection);
             CustomList adapter = new CustomList(RHAList.this, collegeSelection,
                     filterStr(names, indices), filterStr(colleges, indices),
-                    filterImg(images, indices));
+                    filterStr(rooms, indices), filterImg(images, indices));
             rhaList.setAdapter(adapter);
         }
 
@@ -156,13 +155,14 @@ public class RHAList extends ActionBarActivity {
     }
 
     // create RHAs
-    private HashMap<String, String> dummyID (String college, String name, int img) {
+    private HashMap<String, String> dummyID (String college, String name, String room, int img) {
         HashMap<String, String> thing = new HashMap<>();
         thing.put("college", college);
         thing.put("name", name);
 
         names.add(name);
         colleges.add(college);
+        rooms.add(room);
         images.add(img);
 
         return thing;
@@ -172,27 +172,13 @@ public class RHAList extends ActionBarActivity {
     private void initList() {
         names = new ArrayList<>();
         colleges = new ArrayList<>();
+        rooms = new ArrayList<>();
         images = new ArrayList<>();
 
-        practiceList.add(dummyID("Wiess", "Jessica Dawson", R.drawable.empty_rha_img));
-        practiceList.add(dummyID("Wiess", "GaYoung Park", R.drawable.empty_rha_img));
-        practiceList.add(dummyID("Duncan", "Karan Thakker", R.drawable.empty_rha_img));
+        practiceList.add(dummyID("Wiess", "Jessica Dawson", "420", R.drawable.empty_rha_img));
+        practiceList.add(dummyID("Wiess", "GaYoung Park", "321", R.drawable.empty_rha_img));
+        practiceList.add(dummyID("Duncan", "Karan Thakker", "234", R.drawable.empty_rha_img));
     }
-
-    // filters the list of RHAs by college
-//    private List<Map<String, String>> filteredPracticeList() {
-//
-//        List<Map<String, String>> filtered = new ArrayList<>();
-//
-//        for (Map<String, String> map : practiceList) {
-//
-//            if (collegeSelection.equals("All Colleges") ||
-//                    map.get("college").equals(collegeSelection))
-//                filtered.add(map);
-//        }
-//
-//        return filtered;
-//    }
 
     private ArrayList<Integer> extractIndices (ArrayList<String> colleges, String collegeSelection) {
         ArrayList<Integer> indices = new ArrayList<>();

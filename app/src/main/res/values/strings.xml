@@ -31,5 +31,6 @@
     <string name="title_activity_send_message">SendMessage</string>
     <string name="title_activity_send_message_to_all">SendMessageToAll</string>
     <string name="title_activity_send_personal_message">SendPersonalMessage</string>
+    <string name="title_activity_inbox">Inbox</string>
 
 </resources>
