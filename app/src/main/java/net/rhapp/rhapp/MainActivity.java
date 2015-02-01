@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         StrictMode.setThreadPolicy(policy);
         CasClient c = new CasClient(client,"https://netid.rice.edu/cas/");
         try {
-            c.login("https%3A%2F%2Fowlspace-ccm.rice.edu%2Fsakai-login-tool%2Fcontainer","jvp1","Thegreatdeception7");
+            c.login("https%3A%2F%2Fowlspace-ccm.rice.edu%2Fsakai-login-tool%2Fcontainer","","");
         } catch (CasAuthenticationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

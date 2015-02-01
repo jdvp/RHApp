@@ -1,12 +1,19 @@
 package net.rhapp.rhapp;
 
+import android.app.LoaderManager;
+import android.content.Loader;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SimpleCursorAdapter;
 
 
-public class RHAList extends ActionBarActivity {
+public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    // This is the Adapter being used to display the list's data
+    SimpleCursorAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,4 +43,21 @@ public class RHAList extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+    //ListView myList = (ListView) findViewById(R.id.ListOfRHAs);
 }
