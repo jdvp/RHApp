@@ -19,8 +19,8 @@ public class Inbox extends ActionBarActivity {
 
     ListView msgList;
     ArrayList<String> names;
-    ArrayList<Boolean> bools;
     ArrayList<String> msgs;
+    ArrayList<Boolean> bools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
