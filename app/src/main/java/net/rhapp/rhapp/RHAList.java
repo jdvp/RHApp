@@ -121,20 +121,26 @@ public class RHAList extends ActionBarActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             // temporary: displays a message
-            Context context = getApplicationContext();
-            CharSequence text = "Send message to " + (parent.getItemAtPosition(position));
-            int duration = Toast.LENGTH_SHORT;
+//            Context context = getApplicationContext();
+//            CharSequence text = "Send message to " + (parent.getItemAtPosition(position));
+//            int duration = Toast.LENGTH_SHORT;
+//
+//            Toast toast = Toast.makeText(context, text, duration);
+//            toast.show();
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-
-            //TODO: go to activity that sends a message to a particular RHA
+            goToSendMessageToRHA((String) parent.getItemAtPosition(position));
         }
     }
 
     public void goToSendMessageToAll (View view) {
         Intent msgToAllIntent = new Intent(this, SendMessageToAll.class);
         msgToAllIntent.putExtra("college", collegeSelection);
+        startActivity(msgToAllIntent);
+    }
+
+    public void goToSendMessageToRHA (String rhaName) {
+        Intent msgToAllIntent = new Intent(this, SendMessageToAll.class);
+        msgToAllIntent.putExtra("rha", rhaName);
         startActivity(msgToAllIntent);
     }
 
