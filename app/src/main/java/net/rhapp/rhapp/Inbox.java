@@ -1,6 +1,7 @@
 package net.rhapp.rhapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -59,6 +60,9 @@ public class Inbox extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.to_rha_list) {
+            goToList();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -80,6 +84,21 @@ public class Inbox extends ActionBarActivity {
     }
 
     private void initList() {
+        names = new ArrayList<>();
+        msgs = new ArrayList<>();
+        bools = new ArrayList<>();
 
+        names.add("Jess");
+        msgs.add("Hi this is Jess blablabla I'm writing random text okay goodbye");
+        bools.add(false);
+
+        names.add("JD");
+        msgs.add("Hi this is JD blablabla I'm writing random text here's more text yay this is great");
+        bools.add(true);
+    }
+
+    public void goToList () {
+        Intent inboxIntent = new Intent(this, RHAList.class);
+        startActivity(inboxIntent);
     }
 }

@@ -20,5 +20,6 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/msg_stub" android:layout_below="@+id/sender_name"
-            android:layout_toLeftOf="@+id/unresolved"/>
+            android:layout_toLeftOf="@+id/unresolved"
+            android:singleLine="true"/>
 </RelativeLayout>

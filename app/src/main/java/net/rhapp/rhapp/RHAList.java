@@ -73,6 +73,9 @@ public class RHAList extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.to_inbox) {
+            goToInbox();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -152,6 +155,11 @@ public class RHAList extends ActionBarActivity {
         Intent msgToAllIntent = new Intent(this, SendMessage.class);
         msgToAllIntent.putExtra("rha", rhaName);
         startActivity(msgToAllIntent);
+    }
+
+    public void goToInbox () {
+        Intent inboxIntent = new Intent(this, Inbox.class);
+        startActivity(inboxIntent);
     }
 
     // create RHAs
