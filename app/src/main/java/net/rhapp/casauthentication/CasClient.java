@@ -1,8 +1,5 @@
 package net.rhapp.casauthentication;
 
-/**
- * Created by JD on 1/31/2015.
- */
 import android.util.Log;
 
 import java.io.BufferedReader;
