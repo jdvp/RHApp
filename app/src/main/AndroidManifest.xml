@@ -20,6 +20,18 @@
             android:name=".RHAList"
             android:label="@string/title_activity_rhalist" >
         </activity>
+        <activity
+            android:name=".SendAll_Message"
+            android:label="@string/title_activity_send_all__message" >
+        </activity>
+        <activity
+            android:name=".SendMessage"
+            android:label="@string/title_activity_send_message" >
+        </activity>
+        <activity
+            android:name=".SendMessageToAll"
+            android:label="@string/title_activity_send_message_to_all" >
+        </activity>
     </application>
 
 </manifest>

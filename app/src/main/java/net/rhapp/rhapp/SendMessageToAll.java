@@ -1,26 +1,24 @@
 package net.rhapp.rhapp;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 
-public class RHAList extends ActionBarActivity {
+public class SendMessageToAll extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rhalist);
+        setContentView(R.layout.activity_send_message_to_all);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_rhalist, menu);
+        getMenuInflater().inflate(R.menu.menu_send_message_to_all, menu);
         return true;
     }
 
@@ -38,10 +36,4 @@ public class RHAList extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void goToSendMessageToAll (View view) {
-        Intent sendMessageToAllIntent = new Intent(this, SendMessageToAll.class);
-        startActivity(sendMessageToAllIntent);
-    }
-
 }

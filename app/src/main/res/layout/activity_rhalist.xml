@@ -22,8 +22,19 @@
         <Spinner
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner" android:layout_weight="1" android:spinnerMode="dialog"
+                android:id="@+id/collegeSelection" android:layout_weight="1" android:spinnerMode="dialog"
                 android:prompt="@string/college_prompt" android:entries="@array/college_array"
                 android:focusableInTouchMode="true"/>
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Message to All RHAs"
+        android:id="@+id/sendAll"
+        android:layout_below="@+id/RHAListHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="goToSendMessageToAll" />
+
 </RelativeLayout>

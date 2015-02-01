@@ -4,7 +4,6 @@
     <string name="app_name">RHApp</string>
     <string name="title">RHApp</string>
     <string name="action_settings">Settings</string>
-
     <string name="college_prompt">Select a college:</string>
     <string name="hello_world">Hello world!</string>
     <string name="rha_list_title">List of RHAs</string>
@@ -24,5 +23,9 @@
         <item>Wiess</item>
         <item>Will Rice</item>
     </string-array>
+
+    <string name="title_activity_send_all__message">SendAll_Message</string>
+    <string name="title_activity_send_message">SendMessage</string>
+    <string name="title_activity_send_message_to_all">SendMessageToAll</string>
 
 </resources>
