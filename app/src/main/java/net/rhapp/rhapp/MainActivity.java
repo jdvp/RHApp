@@ -10,10 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import ch.boye.httpclientandroidlib.client.HttpClient;
-import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
-import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
-import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
+//import ch.boye.httpclientandroidlib.client.HttpClient;
+//import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
+//import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
+//import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -29,22 +29,22 @@ public class MainActivity extends ActionBarActivity {
         txtSampleTxt.setTypeface(blockFonts);
 
 
-        HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
-
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-
-        StrictMode.setThreadPolicy(policy);
-        CasClient c = new CasClient(client,"https://netid.rice.edu/cas/");
-        try {
-            c.login("https%3A%2F%2Fowlspace-ccm.rice.edu%2Fsakai-login-tool%2Fcontainer","","");
-        } catch (CasAuthenticationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (CasProtocolException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
+//
+//
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//
+//        StrictMode.setThreadPolicy(policy);
+//        CasClient c = new CasClient(client,"https://netid.rice.edu/cas/");
+//        try {
+//            c.login("https%3A%2F%2Fowlspace-ccm.rice.edu%2Fsakai-login-tool%2Fcontainer","","");
+//        } catch (CasAuthenticationException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        } catch (CasProtocolException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
 
     }
 

@@ -88,7 +88,6 @@
     <orderEntry type="library" exported="" name="bcprov-jdk15-1.45" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="commons-logging-1.2" level="project" />
     <orderEntry type="library" exported="" name="cas-client-core-3.3.3" level="project" />
   </component>
 </module>
