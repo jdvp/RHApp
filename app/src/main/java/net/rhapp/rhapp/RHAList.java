@@ -1,19 +1,36 @@
 package net.rhapp.rhapp;
 
+import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 
-public class RHAList extends ActionBarActivity {
+public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private String collegeSelection;
+    private Spinner collegeSelectSpinner = (Spinner) findViewById(R.id.collegeSelection);
+    private ListView rhaList = (ListView) findViewById(R.id.listOfRHAs);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rhalist);
+
+        // set listeners
+        collegeSelectSpinner.setOnItemSelectedListener(new collegeSelectListener());
+        rhaList.setOnItemClickListener(new rhaListListener());
+
     }
 
 
@@ -39,8 +56,48 @@ public class RHAList extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void goToSendMessageToAll (View view) {
-        Intent SendMessageToAllIntent = new Intent(this, SendMessageToAll.class);
-        startActivity(SendMessageToAllIntent);
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
+    private class collegeSelectListener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            collegeSelection = (String) parent.getItemAtPosition(position);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+            collegeSelection = "All";
+        }
+    }
+
+    private class rhaListListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            // temporary: displays a message
+            Context context = getApplicationContext();
+            CharSequence text = "Send message to" + (String) parent.getItemAtPosition(position);
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+            //TODO: go to activity that sends a message to a particular RHA
+        }
     }
 }
