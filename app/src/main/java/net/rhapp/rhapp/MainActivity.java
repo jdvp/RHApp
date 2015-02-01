@@ -24,7 +24,7 @@ import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
 
 public class MainActivity extends ActionBarActivity {
 
-    public boolean DEBUG = false;
+    public boolean DEBUG = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
