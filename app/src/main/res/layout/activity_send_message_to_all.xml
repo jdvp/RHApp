@@ -87,7 +87,7 @@
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="anonymous"
+                    android:text="Anonymous"
                     android:id="@+id/anonCkBx"
                     android:checked="false"
                     android:layout_alignBottom="@+id/sendBtn"
