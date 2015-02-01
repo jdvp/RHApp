@@ -6,6 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="college_prompt">Select a college:</string>
     <string name="hello_world">Hello world!</string>
+    <string name="logo_description">logo: owl with condom eyes</string>
     <string name="rha_list_title">List of RHAs</string>
     <string name="title_activity_rhalist">RHAList</string>
     <string name="enter_message_prompt">Enter message here</string>
