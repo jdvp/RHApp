@@ -30,6 +30,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="bottom"
+        android:id="@+id/mainScreenLayout"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true">
 
@@ -54,6 +55,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
+            android:id="@+id/buttonBar"
             android:layout_centerHorizontal="true">
 
             <Button

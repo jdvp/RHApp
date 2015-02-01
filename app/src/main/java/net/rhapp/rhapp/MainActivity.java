@@ -1,15 +1,21 @@
 package net.rhapp.rhapp;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,10 +30,16 @@ import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
 
 public class MainActivity extends ActionBarActivity {
 
+    public static final String LOGIN_KEY = "USER_LOGGED_IN";
+    public static final String USER_KEY = "USERNAME";
     public boolean DEBUG = true;
+    public boolean logIn = false;
+    public String username = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -35,6 +47,16 @@ public class MainActivity extends ActionBarActivity {
         Typeface blockFonts = Typeface.createFromAsset(getAssets(),"fonts/BreeSerif-Regular.ttf");
         TextView txtSampleTxt = (TextView) findViewById(R.id.titleText);
         txtSampleTxt.setTypeface(blockFonts);
+
+        if (savedInstanceState != null) {
+            // Restore value of members from saved state
+            boolean login = savedInstanceState.getBoolean(LOGIN_KEY);
+            if(login){
+                username = savedInstanceState.getString(USER_KEY);
+                LoggedIn();
+            }
+
+        }
     }
 
 
@@ -63,8 +85,10 @@ public class MainActivity extends ActionBarActivity {
     public void goToRHAList (View view) {
 
         if (DEBUG) {
-            Intent RHAListIntent = new Intent(this, RHAList.class);
-            startActivity(RHAListIntent);
+            logIn = true;
+            username = "Debug";
+            LoggedIn();
+            nextPage();
         } else {
 
             HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
@@ -75,11 +99,11 @@ public class MainActivity extends ActionBarActivity {
             StrictMode.setThreadPolicy(policy);
             CasClient c = new CasClient(client, "https://netid.rice.edu/cas/");
             try {
-                EditText username = (EditText) findViewById(R.id.netidField);
+                EditText uname = (EditText) findViewById(R.id.netidField);
                 EditText password = (EditText) findViewById(R.id.passwordField);
-                if (c.login("https://rhapp.rhapp.net", username.getText().toString(), password.getText().toString())) {
-                    Intent RHAListIntent = new Intent(this, RHAList.class);
-                    startActivity(RHAListIntent);
+                if (c.login("https://rhapp.rhapp.net", uname.getText().toString(), password.getText().toString())) {
+                    logIn = true;
+                    username = uname.getText().toString();
                 }
                 c.logout();
             } catch (CasAuthenticationException e) {
@@ -93,5 +117,68 @@ public class MainActivity extends ActionBarActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void LoggedIn(){
+        LinearLayout rl = (LinearLayout) findViewById(R.id.mainScreenLayout);
+        rl.removeView(findViewById(R.id.netidField));
+        rl.removeView(findViewById(R.id.passwordField));
+        rl.removeView(findViewById(R.id.buttonBar));
+
+
+        LinearLayout.LayoutParams lpv = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        TextView welcome = new TextView(this);
+        welcome.setText("Welcome, " + username + "!");
+        welcome.setLayoutParams(lpv);
+        welcome.setTextSize(24);
+        rl.addView(welcome);
+
+        LinearLayout buttonConsole = new LinearLayout(this);
+        buttonConsole.setOrientation(LinearLayout.HORIZONTAL);
+
+        Button logout = new Button(this);
+        logout.setText("Logout");
+        logout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                logOut();
+            }
+        });
+
+        final Button nextPage =  new Button(this);
+        nextPage.setText("Next Page");
+
+        nextPage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                nextPage();
+            }
+        });
+
+
+        buttonConsole.addView(logout, lpv);
+        buttonConsole.addView(nextPage, lpv);
+
+        rl.addView(buttonConsole);
+
+        welcome.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
+    }
+
+    public void logOut(){
+        logIn = false;
+        username = "";
+
+        setContentView(R.layout.activity_main);
+    }
+
+    public void nextPage(){
+        Intent RHAListIntent = new Intent(this, RHAList.class);
+        startActivity(RHAListIntent);
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putBoolean("LOGGEDIN", logIn);
+        savedInstanceState.putString("USERNAME",username);
+        super.onSaveInstanceState(savedInstanceState);
     }
 }
