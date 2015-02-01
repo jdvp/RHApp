@@ -16,20 +16,24 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class RHAList extends ActionBarActivity {
 
     private String collegeSelection;
-    private Spinner collegeSelectSpinner = (Spinner) findViewById(R.id.collegeSelection);
-    private ListView rhaList = (ListView) findViewById(R.id.listOfRHAs);
+    private Spinner collegeSelectSpinner;
+    private ListView rhaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rhalist);
 
+        // set stuff
+        collegeSelectSpinner = (Spinner) findViewById(R.id.collegeSelection);
+        rhaList = (ListView) findViewById(R.id.listOfRHAs);
+
         // set listeners
         collegeSelectSpinner.setOnItemSelectedListener(new collegeSelectListener());
-        rhaList.setOnItemClickListener(new rhaListListener());
+       rhaList.setOnItemClickListener(new rhaListListener());
 
     }
 
@@ -55,27 +59,35 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
 
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
-
+//
+//    @Override
+//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+//        return null;
+//    }
+//
+//    @Override
+//    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+//
+//    }
+//
+//    @Override
+//    public void onLoaderReset(Loader<Cursor> loader) {
+//
+//    }
+//
     private class collegeSelectListener implements AdapterView.OnItemSelectedListener {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             collegeSelection = (String) parent.getItemAtPosition(position);
+
+            // temporary: displays a message
+            Context context = getApplicationContext();
+            CharSequence text = "Viewing all from " + collegeSelection;
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
 
         @Override
@@ -91,7 +103,7 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
 
             // temporary: displays a message
             Context context = getApplicationContext();
-            CharSequence text = "Send message to" + (String) parent.getItemAtPosition(position);
+            CharSequence text = "Send message to " + (String) parent.getItemAtPosition(position);
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -99,5 +111,10 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
 
             //TODO: go to activity that sends a message to a particular RHA
         }
+    }
+
+    public void goToSendMessageToAll (View view) {
+        Intent MsgToAllIntent = new Intent(this, SendMessageToAll.class);
+        startActivity(MsgToAllIntent);
     }
 }
