@@ -7,13 +7,11 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,10 +19,12 @@ import java.util.List;
 import java.util.Map;
 
 
-public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class RHAList extends ActionBarActivity {
 
     private String collegeSelection;
     private List<Map<String, String>> practiceList;
+    SimpleAdapter simpleAdpt;
+    ListView rhaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +33,20 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
 
         // set stuff
         Spinner collegeSelectSpinner = (Spinner) findViewById(R.id.collegeSelection);
-        ListView rhaList = (ListView) findViewById(R.id.listOfRHAs);
+        rhaList = (ListView) findViewById(R.id.listOfRHAs);
+        collegeSelection = "All Colleges";
 
         // set listeners
         collegeSelectSpinner.setOnItemSelectedListener(new collegeSelectListener());
         rhaList.setOnItemClickListener(new rhaListListener());
 
-        practiceList = new ArrayList<Map<String,String>>();
+        // trying out lists
+        practiceList = new ArrayList<>();
         initList();
+        simpleAdpt = new SimpleAdapter(this, filteredPracticeList(),
+                android.R.layout.simple_list_item_2, new String[] {"name", "college"},
+                new int[] {android.R.id.text1, android.R.id.text2});
+        rhaList.setAdapter(simpleAdpt);
 
     }
 
@@ -67,26 +73,20 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
-
     private class collegeSelectListener implements AdapterView.OnItemSelectedListener {
 
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             collegeSelection = (String) parent.getItemAtPosition(position);
+
+
+//            simpleAdpt = new SimpleAdapter(getBaseContext(), practiceList,
+//                    android.R.layout.simple_list_item_1, new String[] {collegeSelection},
+//                    new int[] {android.R.id.text1});
+            simpleAdpt = new SimpleAdapter(getBaseContext(), filteredPracticeList(),
+                    android.R.layout.simple_list_item_2, new String[] {"name", "college"},
+                    new int[] {android.R.id.text1, android.R.id.text2});
+            rhaList.setAdapter(simpleAdpt);
 
             // temporary: displays a message
             Context context = getApplicationContext();
@@ -99,7 +99,7 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
 
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-            collegeSelection = "All";
+            collegeSelection = "All Colleges";
         }
     }
 
@@ -126,17 +126,35 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
         startActivity(msgToAllIntent);
     }
 
-    private HashMap<String, String> dummyID (String college, String name) {
-        HashMap<String, String> thing = new HashMap<String, String>();
-        thing.put(college, name);
+    private HashMap<String, String> dummyID (String college, String name, String color) {
+        HashMap<String, String> thing = new HashMap<>();
+        thing.put("college", college);
+        thing.put("name", name);
+        thing.put("color", color);
         return thing;
     }
 
 
     private void initList() {
-        practiceList.add(dummyID("Wiess", "Jess"));
-        practiceList.add(dummyID("Wiess", "GaYoung"));
-        practiceList.add(dummyID("Karan", "S"));
+        practiceList.add(dummyID("Wiess", "Jess", "white"));
+        practiceList.add(dummyID("Wiess", "GaYoung", "pink"));
+        practiceList.add(dummyID("Duncan", "Karan", "blue"));
+    }
+
+    // filters the list of RHAs by college
+    private List<Map<String, String>> filteredPracticeList() {
+
+        List<Map<String, String>> filtered = new ArrayList<>();
+
+        for (Map<String, String> map : practiceList) {
+
+            if (collegeSelection.equals("All Colleges") ||
+                    map.get("college").equals(collegeSelection))
+                filtered.add(map);
+        }
+
+        return filtered;
+
     }
 
 }
