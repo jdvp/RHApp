@@ -21,7 +21,7 @@
         android:layout_width="168dp"
         android:layout_height="193dp"
         android:id="@+id/imageView"
-        android:background="@drawable/rhapp_logo"
+        android:background="@drawable/logo"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
