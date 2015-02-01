@@ -143,14 +143,14 @@ public class RHAList extends ActionBarActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         } else {
-            Intent msgToAllIntent = new Intent(this, SendMessageToAll.class);
+            Intent msgToAllIntent = new Intent(this, SendMessage.class);
             msgToAllIntent.putExtra("college", collegeSelection);
             startActivity(msgToAllIntent);
         }
     }
 
     public void goToSendMessageToRHA (String rhaName) {
-        Intent msgToAllIntent = new Intent(this, SendMessageToAll.class);
+        Intent msgToAllIntent = new Intent(this, SendMessage.class);
         msgToAllIntent.putExtra("rha", rhaName);
         startActivity(msgToAllIntent);
     }
