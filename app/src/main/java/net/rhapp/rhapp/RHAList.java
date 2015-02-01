@@ -15,10 +15,16 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private String collegeSelection;
+    private List<Map<String, String>> practiceList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +37,10 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
 
         // set listeners
         collegeSelectSpinner.setOnItemSelectedListener(new collegeSelectListener());
-       rhaList.setOnItemClickListener(new rhaListListener());
+        rhaList.setOnItemClickListener(new rhaListListener());
+
+        practiceList = new ArrayList<Map<String,String>>();
+        initList();
 
     }
 
@@ -112,7 +121,22 @@ public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCa
     }
 
     public void goToSendMessageToAll (View view) {
-        Intent MsgToAllIntent = new Intent(this, SendMessageToAll.class);
-        startActivity(MsgToAllIntent);
+        Intent msgToAllIntent = new Intent(this, SendMessageToAll.class);
+        msgToAllIntent.putExtra("college", collegeSelection);
+        startActivity(msgToAllIntent);
     }
+
+    private HashMap<String, String> dummyID (String college, String name) {
+        HashMap<String, String> thing = new HashMap<String, String>();
+        thing.put(college, name);
+        return thing;
+    }
+
+
+    private void initList() {
+        practiceList.add(dummyID("Wiess", "Jess"));
+        practiceList.add(dummyID("Wiess", "GaYoung"));
+        practiceList.add(dummyID("Karan", "S"));
+    }
+
 }

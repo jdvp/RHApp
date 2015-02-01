@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class SendMessageToAll extends ActionBarActivity {
@@ -12,6 +13,8 @@ public class SendMessageToAll extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_message_to_all);
+
+        setRecipientDisplay();
     }
 
 
@@ -35,5 +38,15 @@ public class SendMessageToAll extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setRecipientDisplay() {
+        // display recipient
+        String recipients = getIntent().getStringExtra("college");
+        TextView recipientDisplay = (TextView)findViewById(R.id.toName);
+        if (recipients.equals("All Colleges"))
+            recipientDisplay.setText("All RHAs");
+        else
+            recipientDisplay.setText("All " + recipients + " RHAs");
     }
 }
