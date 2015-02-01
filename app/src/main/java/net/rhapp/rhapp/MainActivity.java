@@ -1,5 +1,6 @@
 package net.rhapp.rhapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.StrictMode;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.rhapp.casauthentication.CasAuthenticationException;
 import net.rhapp.casauthentication.CasClient;
@@ -75,10 +77,13 @@ public class MainActivity extends ActionBarActivity {
             }
             c.logout();
         } catch (CasAuthenticationException e) {
-            // TODO Auto-generated catch block
+            Context context = getApplicationContext();
+            CharSequence text = "Incorrect username/password";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
             e.printStackTrace();
         } catch (CasProtocolException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
