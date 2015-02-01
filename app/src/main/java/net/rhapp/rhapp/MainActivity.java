@@ -24,6 +24,8 @@ import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
 
 public class MainActivity extends ActionBarActivity {
 
+    public boolean DEBUG = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,31 +62,36 @@ public class MainActivity extends ActionBarActivity {
 
     public void goToRHAList (View view) {
 
-        HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
+        if (DEBUG) {
+            Intent RHAListIntent = new Intent(this, RHAList.class);
+            startActivity(RHAListIntent);
+        } else {
+
+            HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
 
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-        StrictMode.setThreadPolicy(policy);
-        CasClient c = new CasClient(client,"https://netid.rice.edu/cas/");
-        try {
-            EditText username = (EditText) findViewById(R.id.netidField);
-            EditText password = (EditText) findViewById(R.id.passwordField);
-            if(c.login("https://rhapp.rhapp.net", username.getText().toString(), password.getText().toString()))
-            {
-                Intent RHAListIntent = new Intent(this, RHAList.class);
-                startActivity(RHAListIntent);
+            StrictMode.setThreadPolicy(policy);
+            CasClient c = new CasClient(client, "https://netid.rice.edu/cas/");
+            try {
+                EditText username = (EditText) findViewById(R.id.netidField);
+                EditText password = (EditText) findViewById(R.id.passwordField);
+                if (c.login("https://rhapp.rhapp.net", username.getText().toString(), password.getText().toString())) {
+                    Intent RHAListIntent = new Intent(this, RHAList.class);
+                    startActivity(RHAListIntent);
+                }
+                c.logout();
+            } catch (CasAuthenticationException e) {
+                Context context = getApplicationContext();
+                CharSequence text = "Incorrect username/password";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                e.printStackTrace();
+            } catch (CasProtocolException e) {
+                e.printStackTrace();
             }
-            c.logout();
-        } catch (CasAuthenticationException e) {
-            Context context = getApplicationContext();
-            CharSequence text = "Incorrect username/password";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            e.printStackTrace();
-        } catch (CasProtocolException e) {
-            e.printStackTrace();
         }
     }
 }
