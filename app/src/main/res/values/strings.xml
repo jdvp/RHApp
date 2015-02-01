@@ -8,6 +8,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="rha_list_title">List of RHAs</string>
     <string name="title_activity_rhalist">RHAList</string>
+    <string name="enter_message_prompt">Enter message here</string>
 
     <string-array name="college_array">
         <item>All Colleges</item>
