@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="80dp"
+        android:textSize="80sp"
         android:textColor="#ff0cbeff"
         android:textColorHighlight="#ff00c6ff"
         android:password="false"
@@ -23,23 +23,22 @@
         android:id="@+id/imageView"
         android:background="@drawable/rhapp_logo"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" android:contentDescription="@string/logo_description"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="bottom"
-        android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/titleText"
-        android:layout_alignStart="@+id/titleText">
+        android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false" android:layout_centerHorizontal="true">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/netIDInput"
             android:hint="NetID" />
 
         <EditText
@@ -47,14 +46,14 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/editText3"
+            android:id="@+id/passwordInput"
             android:hint="Password" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Submit"
-            android:id="@+id/button" android:onClick="goToRHAList"/>
+            android:id="@+id/submitButton" android:onClick="goToRHAList"/>
 
     </LinearLayout>
 
