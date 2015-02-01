@@ -24,12 +24,8 @@
             android:label="@string/title_activity_rhalist" >
         </activity>
         <activity
-            android:name=".SendMessageToAll"
+            android:name=".SendMessage"
             android:label="@string/title_activity_send_message_to_all" >
-        </activity>
-        <activity
-            android:name=".SendPersonalMessage"
-            android:label="@string/title_activity_send_personal_message" >
         </activity>
     </application>
 
