@@ -162,6 +162,11 @@ public class RHAList extends ActionBarActivity {
         startActivity(inboxIntent);
     }
 
+    public void goToInbox (View view) {
+        Intent inboxIntent = new Intent(this, Inbox.class);
+        startActivity(inboxIntent);
+    }
+
     // create RHAs
     private HashMap<String, String> dummyID (String college, String name, String room, int img) {
         HashMap<String, String> thing = new HashMap<>();
