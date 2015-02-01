@@ -110,7 +110,7 @@ public class RHAList extends ActionBarActivity {
 
             // temporary: displays a message
             Context context = getApplicationContext();
-            CharSequence text = "Send message to " + (String) parent.getItemAtPosition(position);
+            CharSequence text = "Send message to " + ((HashMap) parent.getItemAtPosition(position)).get("name");
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
