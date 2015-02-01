@@ -43,10 +43,10 @@ public class SendMessageToAll extends ActionBarActivity {
     private void setRecipientDisplay() {
         // display recipient
         String recipients = getIntent().getStringExtra("college");
-        TextView recipientDisplay = (TextView)findViewById(R.id.toName);
+        TextView recipientDisplay = (TextView)findViewById(R.id.textView);
         if (recipients.equals("All Colleges"))
-            recipientDisplay.setText("All RHAs");
+            recipientDisplay.setText("To: All RHAs");
         else
-            recipientDisplay.setText("All " + recipients + " RHAs");
+            recipientDisplay.setText("To: " + recipients + " RHAs");
     }
 }
