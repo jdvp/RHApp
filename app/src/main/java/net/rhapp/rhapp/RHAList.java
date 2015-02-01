@@ -16,11 +16,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class RHAList extends ActionBarActivity {
+public class RHAList extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private String collegeSelection;
-    private Spinner collegeSelectSpinner;
-    private ListView rhaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +26,8 @@ public class RHAList extends ActionBarActivity {
         setContentView(R.layout.activity_rhalist);
 
         // set stuff
-        collegeSelectSpinner = (Spinner) findViewById(R.id.collegeSelection);
-        rhaList = (ListView) findViewById(R.id.listOfRHAs);
+        Spinner collegeSelectSpinner = (Spinner) findViewById(R.id.collegeSelection);
+        ListView rhaList = (ListView) findViewById(R.id.listOfRHAs);
 
         // set listeners
         collegeSelectSpinner.setOnItemSelectedListener(new collegeSelectListener());
@@ -59,22 +57,22 @@ public class RHAList extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-//
-//    @Override
-//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-//
-//    }
-//
-//    @Override
-//    public void onLoaderReset(Loader<Cursor> loader) {
-//
-//    }
-//
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
+
     private class collegeSelectListener implements AdapterView.OnItemSelectedListener {
 
         @Override
