@@ -18,8 +18,8 @@ public class Inbox extends ActionBarActivity {
 
     ListView msgList;
     ArrayList<String> names;
-    ArrayList<String> msgs;
     ArrayList<Boolean> bools;
+    ArrayList<String> msgs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

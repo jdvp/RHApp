@@ -17,11 +17,12 @@ import java.util.Map;
  * Adapted from http://www.learn2crack.com/2013/10/android-custom-listview-images-text-example.html
  */
 public class CustomList extends ArrayAdapter<String>{
-    private final Activity context;
 
     private ArrayList<String> titles;
     private ArrayList<String> subtext1, subtext2;
     private ArrayList<Integer> images;
+
+    private final Activity context;
 
 //    public CustomList(Activity context,
 //                      String[] txt1, String[] txt2, Integer[] imageId) {

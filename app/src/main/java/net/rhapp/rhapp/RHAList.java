@@ -18,8 +18,8 @@ import java.util.Map;
 public class RHAList extends ActionBarActivity {
 
     private String collegeSelection;
-    private List<Map<String, String>> practiceList;
     private ListView rhaList;
+    private List<Map<String, String>> practiceList;
 
     private ArrayList<String> names, colleges, rooms;
     private ArrayList<Integer> images;

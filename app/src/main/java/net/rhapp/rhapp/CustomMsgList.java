@@ -11,11 +11,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class CustomMsgList extends ArrayAdapter<String> {
-    private final Activity context;
 
     private ArrayList<String> titles;
     private ArrayList<String> subtext;
     private ArrayList<Boolean> resolved;
+    private final Activity context;
 
 
     public CustomMsgList(Activity context,
