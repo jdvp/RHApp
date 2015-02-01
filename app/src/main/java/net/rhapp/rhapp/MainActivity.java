@@ -2,12 +2,18 @@ package net.rhapp.rhapp;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import ch.boye.httpclientandroidlib.client.HttpClient;
+import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
+import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
+import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -21,6 +27,25 @@ public class MainActivity extends ActionBarActivity {
         Typeface blockFonts = Typeface.createFromAsset(getAssets(),"fonts/BreeSerif-Regular.ttf");
         TextView txtSampleTxt = (TextView) findViewById(R.id.titleText);
         txtSampleTxt.setTypeface(blockFonts);
+
+
+        HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
+
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+        CasClient c = new CasClient(client,"https://netid.rice.edu/cas/");
+        try {
+            c.login("https%3A%2F%2Fowlspace-ccm.rice.edu%2Fsakai-login-tool%2Fcontainer","jvp1","Thegreatdeception7");
+        } catch (CasAuthenticationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (CasProtocolException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
 
