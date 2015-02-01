@@ -38,13 +38,17 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/editText2"
         android:phoneNumber="false"
         android:hint="@string/enter_message_prompt"
-        android:gravity="start|top" />
+        android:gravity="start|top"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/linearLayout"
+        android:layout_above="@+id/InnerRelativeLayout" />
 
     <RelativeLayout
         android:id="@+id/InnerRelativeLayout"
@@ -56,7 +60,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send"
-            android:id="@+id/sendBtn" />
+            android:id="@+id/sendBtn"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/anonCkBx"
+            android:layout_toStartOf="@+id/anonCkBx" />
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -64,10 +71,9 @@
             android:text="Anonymous"
             android:id="@+id/anonCkBx"
             android:checked="false"
-            android:layout_alignBottom="@+id/sendBtn"
-            android:layout_toLeftOf="@+id/sendBtn"
-            android:layout_toStartOf="@+id/sendBtn"
-            android:layout_alignTop="@+id/sendBtn" />
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
