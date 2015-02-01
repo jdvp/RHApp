@@ -1,16 +1,15 @@
 package net.rhapp.casauthentication;
 
 /**
- * Created by JD on 1/31/2015.
+ * Exception for an anomaly in the CAS protocol
 */
-@SuppressWarnings("serial")
 public class CasProtocolException extends Exception
 {
 
-    public CasProtocolException ()
-    {
-        super ();
-    }
+//    public CasProtocolException ()
+//    {
+//        super ();
+//    }
     public CasProtocolException (String message)
     {
         super (message);

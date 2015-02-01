@@ -7,12 +7,12 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 
-public class SendMessageToAll extends ActionBarActivity {
+public class SendMessage extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_message_to_all);
+        setContentView(R.layout.activity_send_message);
 
         setRecipientDisplay();
     }
@@ -21,7 +21,7 @@ public class SendMessageToAll extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_send_message_to_all, menu);
+        getMenuInflater().inflate(R.menu.menu_send_message, menu);
         return true;
     }
 
@@ -42,11 +42,18 @@ public class SendMessageToAll extends ActionBarActivity {
 
     private void setRecipientDisplay() {
         // display recipient
-        String recipients = getIntent().getStringExtra("college");
-        TextView recipientDisplay = (TextView)findViewById(R.id.textView);
-        if (recipients.equals("All Colleges"))
-            recipientDisplay.setText("To: All RHAs");
-        else
-            recipientDisplay.setText("To: " + recipients + " RHAs");
+        if (getIntent().hasExtra("college")) {
+            String recipients = getIntent().getStringExtra("college");
+            TextView recipientDisplay = (TextView)findViewById(R.id.textView);
+            if (recipients.equals("All Colleges"))
+                recipientDisplay.setText("To: All RHAs");
+            else
+                recipientDisplay.setText("To: " + recipients + " RHAs");
+        }
+        else if (getIntent().hasExtra("rha")) {
+            String recipient = getIntent().getStringExtra("rha");
+            TextView recipientDisplay = (TextView) findViewById(R.id.textView);
+            recipientDisplay.setText("To: " + recipient);
+        }
     }
 }
