@@ -48,7 +48,7 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="100pt"
+                android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
                 android:id="@+id/editText2"
@@ -73,16 +73,18 @@
                         android:text="Quantity"
                         android:id="@+id/quantityTxt"
                         android:layout_column="0"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:padding="10dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  Item"
+                        android:text="Item"
                         android:id="@+id/itemTxt"
                         android:layout_column="1"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:paddingLeft="20dp" />
 
                 </TableRow>
 
@@ -97,15 +99,17 @@
                         android:ems="10"
                         android:id="@+id/acetaminophenNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  acetaminophen"
+                        android:text="Acetaminophen"
                         android:id="@+id/acetaminophenTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -119,15 +123,17 @@
                         android:ems="10"
                         android:id="@+id/antacidTabletsNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  antacid tablets"
+                        android:text="Antacid Tablets"
                         android:id="@+id/antacidTabletsTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -141,15 +147,17 @@
                         android:ems="10"
                         android:id="@+id/antibioticOintmentNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  antibiotic ointment"
+                        android:text="Antibiotic Ointment"
                         android:id="@+id/antibioticOintmentTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -163,15 +171,17 @@
                         android:ems="10"
                         android:id="@+id/bandAidsNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  band–aids"
+                        android:text="Band Aids"
                         android:id="@+id/bandAidsTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -185,14 +195,16 @@
                         android:ems="10"
                         android:id="@+id/coldCompressNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  cold compress"
+                        android:text="Cold Compress"
                         android:id="@+id/coldCompressTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -206,15 +218,17 @@
                         android:ems="10"
                         android:id="@+id/condomsNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  condoms"
+                        android:text="Condoms"
                         android:id="@+id/condomsTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -228,15 +242,17 @@
                         android:ems="10"
                         android:id="@+id/coughDropsNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  cough drops"
+                        android:text="Cough Drops"
                         android:id="@+id/coughDropsTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -250,15 +266,17 @@
                         android:ems="10"
                         android:id="@+id/earPlugsNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  ear plugs"
+                        android:text="Ear Plugs"
                         android:id="@+id/earPlugsTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -272,15 +290,17 @@
                         android:ems="10"
                         android:id="@+id/hydrocortisoneNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  hydrocortisone"
+                        android:text="Hydrocortisone"
                         android:id="@+id/hydrocortisoneTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -294,15 +314,17 @@
                         android:ems="10"
                         android:id="@+id/ibuprofenNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  ibuprofen"
+                        android:text="Ibuprofen"
                         android:id="@+id/ibuprofenTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -316,15 +338,17 @@
                         android:ems="10"
                         android:id="@+id/maxiPadsNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  maxi pads"
+                        android:text="Maxi Pads"
                         android:id="@+id/maxiPadsTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -338,15 +362,17 @@
                         android:ems="10"
                         android:id="@+id/personalLubricantNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  personal lubricant"
+                        android:text="Personal Lubricant"
                         android:id="@+id/personalLubricantTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
 
                 <TableRow
@@ -360,15 +386,17 @@
                         android:ems="10"
                         android:id="@+id/tamponsNum"
                         android:layout_column="0"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:maxLength="1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="  tampons"
+                        android:text="Tampons"
                         android:id="@+id/tamponsTxt"
-                        android:layout_column="1" />
+                        android:layout_column="1"
+                        android:paddingLeft="20dp" />
                 </TableRow>
             </TableLayout>
 
@@ -378,6 +406,15 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|right"
                 android:id="@+id/linearLayout2">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Send"
+                    android:id="@+id/sendBtn"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
 
                 <CheckBox
                     android:layout_width="wrap_content"
@@ -389,15 +426,6 @@
                     android:layout_toLeftOf="@+id/sendBtn"
                     android:layout_toStartOf="@+id/sendBtn"
                     android:layout_alignTop="@+id/sendBtn" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Send"
-                    android:id="@+id/sendBtn"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
 
             </LinearLayout>
         </LinearLayout>
