@@ -3,7 +3,8 @@
     package="net.rhapp.rhapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -11,7 +12,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,16 +24,12 @@
             android:label="@string/title_activity_rhalist" >
         </activity>
         <activity
-            android:name=".SendAll_Message"
-            android:label="@string/title_activity_send_all__message" >
-        </activity>
-        <activity
-            android:name=".SendMessage"
-            android:label="@string/title_activity_send_message" >
-        </activity>
-        <activity
             android:name=".SendMessageToAll"
             android:label="@string/title_activity_send_message_to_all" >
+        </activity>
+        <activity
+            android:name=".SendPersonalMessage"
+            android:label="@string/title_activity_send_personal_message" >
         </activity>
     </application>
 

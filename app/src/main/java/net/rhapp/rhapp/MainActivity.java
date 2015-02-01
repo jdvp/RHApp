@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
-//import ch.boye.httpclientandroidlib.client.HttpClient;
-//import ch.boye.httpclientandroidlib.impl.client.DefaultHttpClient;
-//import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
-//import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
+import net.rhapp.casauthentication.CasAuthenticationException;
+import net.rhapp.casauthentication.CasClient;
+import net.rhapp.casauthentication.CasProtocolException;
+
+import ch.boye.httpclientandroidlib.client.HttpClient;
+import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
+import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -27,25 +31,6 @@ public class MainActivity extends ActionBarActivity {
         Typeface blockFonts = Typeface.createFromAsset(getAssets(),"fonts/BreeSerif-Regular.ttf");
         TextView txtSampleTxt = (TextView) findViewById(R.id.titleText);
         txtSampleTxt.setTypeface(blockFonts);
-
-
-//        HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
-//
-//
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//
-//        StrictMode.setThreadPolicy(policy);
-//        CasClient c = new CasClient(client,"https://netid.rice.edu/cas/");
-//        try {
-//            c.login("https%3A%2F%2Fowlspace-ccm.rice.edu%2Fsakai-login-tool%2Fcontainer","","");
-//        } catch (CasAuthenticationException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } catch (CasProtocolException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-
     }
 
 
@@ -72,7 +57,29 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void goToRHAList (View view) {
-        Intent RHAListIntent = new Intent(this, RHAList.class);
-        startActivity(RHAListIntent);
+
+        HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
+
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+        CasClient c = new CasClient(client,"https://netid.rice.edu/cas/");
+        try {
+            EditText username = (EditText) findViewById(R.id.netidField);
+            EditText password = (EditText) findViewById(R.id.passwordField);
+            if(c.login("https://rhapp.rhapp.net", username.getText().toString(), password.getText().toString()))
+            {
+                Intent RHAListIntent = new Intent(this, RHAList.class);
+                startActivity(RHAListIntent);
+            }
+            c.logout();
+        } catch (CasAuthenticationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (CasProtocolException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
