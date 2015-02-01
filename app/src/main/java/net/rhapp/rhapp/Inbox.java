@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class Inbox extends ActionBarActivity {
     ListView msgList;
     ArrayList<String> names;
     ArrayList<String> msgs;
-    ArrayList<Boolean> bools;
+    ArrayList<Boolean> resolved, anon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class Inbox extends ActionBarActivity {
 
 
         // Activity context, ArrayList<String> txt1, ArrayList<String> txt2, ArrayList<Boolean> flag
-        CustomMsgList adapter = new CustomMsgList(Inbox.this, names, msgs, bools);
+        CustomMsgList adapter = new CustomMsgList(Inbox.this, names, msgs, anon, resolved);
         msgList.setAdapter(adapter);
 
     }
@@ -86,15 +85,18 @@ public class Inbox extends ActionBarActivity {
     private void initList() {
         names = new ArrayList<>();
         msgs = new ArrayList<>();
-        bools = new ArrayList<>();
+        resolved = new ArrayList<>();
+        anon = new ArrayList<>();
 
         names.add("Jess");
         msgs.add("Hi this is Jess blablabla I'm writing random text okay goodbye");
-        bools.add(false);
+        resolved.add(false);
+        anon.add(false);
 
         names.add("JD");
         msgs.add("Hi this is JD blablabla I'm writing random text here's more text yay this is great");
-        bools.add(true);
+        resolved.add(true);
+        anon.add(true);
     }
 
     public void goToList () {
