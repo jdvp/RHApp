@@ -37,7 +37,7 @@ public class CustomMsgList extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.msg_list_item, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.sender_name);
         TextView txtSub = (TextView) rowView.findViewById(R.id.msg_stub);
-        ImageView isRes = (ImageView) rowView.findViewById(R.id.unresolved);
+//        ImageView isRes = (ImageView) rowView.findViewById(R.id.unresolved);
 
         // set name (or Anonymous)
         if(anon.get(position))
@@ -47,10 +47,10 @@ public class CustomMsgList extends ArrayAdapter<String> {
         // set msg text
         txtSub.setText(subtext.get(position));
         // set resolved/unresolved
-        if (resolved.get(position))
-            isRes.setVisibility(View.INVISIBLE);
-        else
-            isRes.setVisibility(View.VISIBLE);
+//        if (resolved.get(position))
+//            isRes.setVisibility(View.INVISIBLE);
+//        else
+//            isRes.setVisibility(View.VISIBLE);
 
         return rowView;
     }
