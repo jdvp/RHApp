@@ -30,11 +30,13 @@ import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
 
 public class MainActivity extends ActionBarActivity {
 
-    public static final String LOGIN_KEY = "USER_LOGGED_IN";
-    public static final String USER_KEY = "USERNAME";
-    public boolean DEBUG = true;
-    public boolean logIn = false;
-    public String username = "";
+    private static final String LOGIN_KEY = "USER_LOGGED_IN";
+    private static final String USER_KEY = "USERNAME";
+    private static final String RHA_KEY="USER_IS_A_RHA";
+    private boolean DEBUG = true;
+    private boolean logIn = false;
+    private String username = "";
+    private boolean isRha = false;
 
 
     @Override
@@ -53,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
             boolean login = savedInstanceState.getBoolean(LOGIN_KEY);
             if(login){
                 username = savedInstanceState.getString(USER_KEY);
+                isRha = savedInstanceState.getBoolean(RHA_KEY);
                 LoggedIn();
             }
 
@@ -88,7 +91,10 @@ public class MainActivity extends ActionBarActivity {
             logIn = true;
             username = "Debug";
             LoggedIn();
-            nextPage();
+            if(isRha)
+                loginAsRHA(view);
+            else
+                nextPage();
         } else {
 
             HttpClient client = HttpClientBuilder.create().setRedirectStrategy(new DefaultRedirectStrategy()).build();
@@ -104,6 +110,12 @@ public class MainActivity extends ActionBarActivity {
                 if (c.login("https://rhapp.rhapp.net", uname.getText().toString(), password.getText().toString())) {
                     logIn = true;
                     username = uname.getText().toString();
+                    LoggedIn();
+                    if(isRha)
+                        loginAsRHA(view);
+                    else
+                        nextPage();
+
                 }
                 c.logout();
             } catch (CasAuthenticationException e) {
@@ -120,6 +132,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void LoggedIn(){
+        RHAList rhas = new RHAList("this is ghetto");
+        if(rhas.contains(username))
+            isRha=true;
         LinearLayout rl = (LinearLayout) findViewById(R.id.mainScreenLayout);
         rl.removeView(findViewById(R.id.netidField));
         rl.removeView(findViewById(R.id.passwordField));
@@ -149,7 +164,10 @@ public class MainActivity extends ActionBarActivity {
 
         nextPage.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                nextPage();
+                if(isRha)
+                    loginAsRHA(v);
+                else
+                    nextPage();
             }
         });
 
@@ -172,6 +190,12 @@ public class MainActivity extends ActionBarActivity {
     public void nextPage(){
         Intent RHAListIntent = new Intent(this, RHAList.class);
         startActivity(RHAListIntent);
+    }
+
+    public void loginAsRHA(View view){
+
+        Intent Inbox = new Intent(this, Inbox.class);
+        startActivity(Inbox);
     }
 
 

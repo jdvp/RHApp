@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +22,7 @@ public class RHAList extends ActionBarActivity {
     private ListView rhaList;
     private List<Map<String, String>> practiceList;
 
-    private ArrayList<String> names, colleges, rooms;
+    private ArrayList<String> names, colleges, rooms, netids;
     private ArrayList<Integer> images;
 
     @Override
@@ -53,6 +54,14 @@ public class RHAList extends ActionBarActivity {
         CustomList adapter = new CustomList(RHAList.this, collegeSelection, names, colleges, rooms, images);
         rhaList.setAdapter(adapter);
 
+    }
+
+    public RHAList(){}
+
+    public RHAList(String huh){
+        practiceList = new ArrayList<>();
+        netids = new ArrayList<String>();
+        initList();
     }
 
 
@@ -168,7 +177,7 @@ public class RHAList extends ActionBarActivity {
     }
 
     // create RHAs
-    private HashMap<String, String> dummyID (String college, String name, String room, int img) {
+    private HashMap<String, String> dummyID (String college, String name, String room, String netID, int img) {
         HashMap<String, String> thing = new HashMap<>();
         thing.put("college", college);
         thing.put("name", name);
@@ -176,6 +185,7 @@ public class RHAList extends ActionBarActivity {
         names.add(name);
         colleges.add(college);
         rooms.add(room);
+        netids.add(netID);
         images.add(img);
 
         return thing;
@@ -183,14 +193,15 @@ public class RHAList extends ActionBarActivity {
 
     // init list of RHAs
     private void initList() {
-        names = new ArrayList<>();
-        colleges = new ArrayList<>();
-        rooms = new ArrayList<>();
+        names = new ArrayList<String>();
+        colleges = new ArrayList<String>();
+        rooms = new ArrayList<String>();
         images = new ArrayList<>();
+        netids = new ArrayList<String>();
 
-        practiceList.add(dummyID("Wiess", "Jessica Dawson", "420", R.drawable.empty_rha_img));
-        practiceList.add(dummyID("Wiess", "GaYoung Park", "321", R.drawable.empty_rha_img));
-        practiceList.add(dummyID("Duncan", "Karan Thakker", "234", R.drawable.empty_rha_img));
+        practiceList.add(dummyID("Wiess", "Jessica Dawson", "420", "",R.drawable.empty_rha_img));
+        practiceList.add(dummyID("Wiess", "GaYoung Park", "321", "Debug",R.drawable.empty_rha_img));
+        practiceList.add(dummyID("Duncan", "Karan Thakker", "234", "krt2",R.drawable.empty_rha_img));
     }
 
     private ArrayList<Integer> extractIndices (ArrayList<String> colleges, String collegeSelection) {
@@ -216,6 +227,11 @@ public class RHAList extends ActionBarActivity {
             filteredList.add(origList.get(i));
         }
         return filteredList;
+    }
+
+    public boolean contains(String username){
+        Log.v("RHALIST CONTAINS FUCNTION", netids.toString());
+        return netids.contains(username);
     }
 
 }
