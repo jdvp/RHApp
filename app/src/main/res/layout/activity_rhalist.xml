@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="Go to Inbox"
             android:id="@+id/InboxButton"
-            android:onClick="g"/>
+            android:onClick="goToInox"/>
 
     </LinearLayout>
 
