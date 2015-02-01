@@ -133,9 +133,20 @@ public class RHAList extends ActionBarActivity {
     }
 
     public void goToSendMessageToAll (View view) {
-        Intent msgToAllIntent = new Intent(this, SendMessageToAll.class);
-        msgToAllIntent.putExtra("college", collegeSelection);
-        startActivity(msgToAllIntent);
+
+        // don't go if All Colleges is selected
+        if (collegeSelection.equals("All Colleges")) {
+            Context context = getApplicationContext();
+            CharSequence text = "Can't send to all; Please select a college";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        } else {
+            Intent msgToAllIntent = new Intent(this, SendMessageToAll.class);
+            msgToAllIntent.putExtra("college", collegeSelection);
+            startActivity(msgToAllIntent);
+        }
     }
 
     public void goToSendMessageToRHA (String rhaName) {
