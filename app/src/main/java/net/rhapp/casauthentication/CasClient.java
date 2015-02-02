@@ -28,12 +28,16 @@ import ch.boye.httpclientandroidlib.message.BasicNameValuePair;
  * This client behaves like a browser-client in terms of
  * cookie handling.<br>
  *
- * Code by Mathias Richter updated by Justin Templemore to use
+ * Code originally by Mathias Richter and updated by Justin Templemore to
  * HttpComponentsClient4 and Log4J, and adapted to work with the
  * ECE CAS server.
  *
+ * Updated by JD Porterfield to fit the needs of RHApp and work with
+ * the Rice University CAS system
+ *
  * @author Mathias Richter
  * @author Justin Templemore-Finlayson
+ * @author JD Porterfield
  * @required Apache Http Components Client (Android)
  *
  */
@@ -88,8 +92,7 @@ public class CasClient
      * 		   user credentials are validated, but no service ticket is returned by this method.
      * @param  username
      * @param  password
-     * @return A valid service ticket, if the specified service URL is not null and the
-     * 		   (login; password) pair is accepted by the CAS server
+     * @return true or false depending on whether or not the login is accepted and a service
      * @throws CasAuthenticationException if the (login; password) pair is not accepted
      * 		   by the CAS server.
      * @throws CasProtocolException if there is an error communicating with the CAS server
@@ -131,32 +134,38 @@ public class CasClient
 
                 Log.d (TAG, "POST RESPONSE STATUS=" + response.getStatusLine().getStatusCode() + " : " + response.getStatusLine().toString());
                 Log.d(TAG, "RESPONSE "+ response.toString());
-                //TODO It would seem that when the client is already authenticated, the CAS server
-                // redirects transparently to the service URL!
-                // Success if CAS replies with a 302 HTTP status code and a Location header
-                // We assume that if a valid ticket is provided in the Location header, that it is also a 302 HTTP STATUS
+
+                //Retrieve the Service Ticket
                 Header headers[] = response.getHeaders("Location");
                 if (headers != null && headers.length > 0)
                     serviceTicket = extractServiceTicket (headers[0].getValue());
                 HttpEntity entity = response.getEntity();
                 entity.consumeContent();
 
+                //If there is no service ticket then the login was unsuccessful
                 if (serviceTicket == null)
                 {
-                    Log.i (TAG, "Authentication to service '" + serviceUrl + "' unsuccessul for username '" + username + "' + and passsword + "+password+".");
-                    throw new CasAuthenticationException ("Authentication to service '" + serviceUrl + "' unsuccessul for username '" + username + "'.");
+                    Log.i (TAG, "Authentication to service '" + serviceUrl + "' unsuccessful for username '" + username + "' + and password + "+password+".");
+                    throw new CasAuthenticationException ("Authentication to service '" + serviceUrl + "' unsuccessful for username '" + username + "'.");
                 }
-                else
-                    Log.i (TAG, "Authentication to service '" + serviceUrl + "' successul for username '" + username + "'.");
+                else {
+                    Log.i(TAG, "Authentication to service '" + serviceUrl + "' successful for username '" + username + "'.");
+                }
             }
             catch (IOException e)
             {
                 Log.d (TAG, "IOException trying to login : " + e.getMessage());
                 throw new CasProtocolException ("IOException trying to login : " + e.getMessage());
             }
-            if(response.getStatusLine().getStatusCode() == 302)
-                return true;
-            return false;
+
+            boolean returnVal = false;
+
+            //check that the service ticket exists and that IT IS ACTUALLY VALID (i.e. no spoofing the STs).
+            if(serviceTicket != null && validate(serviceUrl, serviceTicket)) {
+                returnVal = true;
+                logout();
+            }
+            return returnVal;
         }
     }
 
@@ -174,7 +183,7 @@ public class CasClient
         {
             HttpResponse response = httpClient.execute(httpGet);
             logoutSuccess = (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK);
-            Log.d (TAG, response.getStatusLine().toString());
+            Log.d (TAG, response.getStatusLine().toString()+" : LOGOUT SUCCESSFUL");
         }
         catch (Exception e)
         {
@@ -194,10 +203,10 @@ public class CasClient
      *
      * @param serviceUrl The serviceUrl to validate against
      * @param serviceTicket The service ticket (previously provided by the CAS) for the serviceUrl
-     * @return Clear text username of the authenticated user.
+     * @return True if the service ticket is valid, false otherwise.
      * @throws CasProtocolException if a protocol or communication error occurs
      */
-    public String validate (String serviceUrl, String serviceTicket) throws CasAuthenticationException, CasProtocolException
+    public boolean validate (String serviceUrl, String serviceTicket) throws CasAuthenticationException, CasProtocolException
     {
         HttpPost httpPost = new HttpPost (casBaseURL + CAS_SERVICE_VALIDATE_URL_PART );
         Log.d(TAG, "VALIDATE : " + httpPost.getRequestLine());
@@ -222,6 +231,7 @@ public class CasClient
                 username = extractUser (entity.getContent());
                 Log.d (TAG, "VALIDATE OK YOU ARE : " + username);
                 entity.consumeContent();
+                return true;
             }
         }
         catch (Exception e)
@@ -229,7 +239,6 @@ public class CasClient
             Log.d (TAG, "Could not validate: " + e.getMessage ());
             throw new CasProtocolException ("Could not validate : " + e.getMessage ());
         }
-        return username;
     }
 
     /**
