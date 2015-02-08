@@ -405,7 +405,7 @@
                     android:id="@+id/sendBtn"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentEnd="true" android:onClick="sendMessage"/>
 
                 <CheckBox
                     android:layout_width="wrap_content"
@@ -416,7 +416,7 @@
                     android:layout_alignBottom="@+id/sendBtn"
                     android:layout_toLeftOf="@+id/sendBtn"
                     android:layout_toStartOf="@+id/sendBtn"
-                    android:layout_alignTop="@+id/sendBtn" />
+                    android:layout_alignTop="@+id/sendBtn" android:onClick="flipAnon"/>
 
             </LinearLayout>
         </LinearLayout>

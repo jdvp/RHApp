@@ -20,11 +20,15 @@ public class Inbox extends ActionBarActivity {
     ArrayList<String> names;
     ArrayList<String> msgs;
     ArrayList<Boolean> resolved, anon;
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inbox);
+
+        // get username
+        user = getIntent().getStringExtra("netid");
 
         // set list
         msgList = (ListView) findViewById(R.id.msg_list);

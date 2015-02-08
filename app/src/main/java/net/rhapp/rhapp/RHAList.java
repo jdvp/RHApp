@@ -25,10 +25,15 @@ public class RHAList extends ActionBarActivity {
     private ArrayList<String> names, colleges, rooms, netids;
     private ArrayList<Integer> images;
 
+    private String user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rhalist);
+
+        // get username
+        user = getIntent().getStringExtra("netid");
 
         // set stuff
         Spinner collegeSelectSpinner = (Spinner) findViewById(R.id.collegeSelection);
@@ -96,22 +101,13 @@ public class RHAList extends ActionBarActivity {
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             collegeSelection = (String) parent.getItemAtPosition(position);
 
-            // temporary: displays a message
+            // displays a toast confirming selection
             Context context = getApplicationContext();
             CharSequence text = "Viewing all from " + collegeSelection;
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-
-
-//            simpleAdpt = new SimpleAdapter(getBaseContext(), practiceList,
-//                    android.R.layout.simple_list_item_1, new String[] {collegeSelection},
-//                    new int[] {android.R.id.text1});
-//            simpleAdpt = new SimpleAdapter(getBaseContext(), filteredPracticeList(),
-//                    android.R.layout.simple_list_item_2, new String[] {"name", "college"},
-//                    new int[] {android.R.id.text1, android.R.id.text2});
-//            rhaList.setAdapter(simpleAdpt);
 
             ArrayList<Integer> indices = extractIndices(colleges, collegeSelection);
             CustomList adapter = new CustomList(RHAList.this, collegeSelection,
@@ -154,16 +150,18 @@ public class RHAList extends ActionBarActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         } else {
-            Intent msgToAllIntent = new Intent(this, SendMessage.class);
-            msgToAllIntent.putExtra("college", collegeSelection);
-            startActivity(msgToAllIntent);
+            Intent msgIntent = new Intent(this, SendMessage.class);
+            msgIntent.putExtra("college", collegeSelection);
+            msgIntent.putExtra("netid", user);
+            startActivity(msgIntent);
         }
     }
 
     public void goToSendMessageToRHA (String rhaName) {
-        Intent msgToAllIntent = new Intent(this, SendMessage.class);
-        msgToAllIntent.putExtra("rha", rhaName);
-        startActivity(msgToAllIntent);
+        Intent msgIntent = new Intent(this, SendMessage.class);
+        msgIntent.putExtra("rha", rhaName);
+        msgIntent.putExtra("netid", user);
+        startActivity(msgIntent);
     }
 
     public void goToInbox () {
@@ -230,7 +228,7 @@ public class RHAList extends ActionBarActivity {
     }
 
     public boolean contains(String username){
-        Log.v("RHALIST CONTAINS FUCNTION", netids.toString());
+        Log.v("RHALIST CONTAINS FUNCTION", netids.toString());
         return netids.contains(username);
     }
 

@@ -189,12 +189,14 @@ public class MainActivity extends ActionBarActivity {
 
     public void nextPage(){
         Intent RHAListIntent = new Intent(this, RHAList.class);
+        RHAListIntent.putExtra("netid", username);
         startActivity(RHAListIntent);
     }
 
     public void loginAsRHA(View view){
 
         Intent Inbox = new Intent(this, Inbox.class);
+        Inbox.putExtra("netid", username);
         startActivity(Inbox);
     }
 
