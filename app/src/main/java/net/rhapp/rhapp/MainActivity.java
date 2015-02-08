@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,13 @@ import net.rhapp.casauthentication.CasAuthenticationException;
 import net.rhapp.casauthentication.CasClient;
 import net.rhapp.casauthentication.CasProtocolException;
 
+import org.apache.http.HttpRequest;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import ch.boye.httpclientandroidlib.client.HttpClient;
 import ch.boye.httpclientandroidlib.impl.client.DefaultRedirectStrategy;
 import ch.boye.httpclientandroidlib.impl.client.HttpClientBuilder;
@@ -33,7 +41,7 @@ public class MainActivity extends ActionBarActivity {
     private static final String LOGIN_KEY = "USER_LOGGED_IN";
     private static final String USER_KEY = "USERNAME";
     private static final String RHA_KEY="USER_IS_A_RHA";
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
     private boolean logIn = false;
     private String username = "";
     private boolean isRha = false;
@@ -117,7 +125,6 @@ public class MainActivity extends ActionBarActivity {
                         nextPage();
 
                 }
-                c.logout();
             } catch (CasAuthenticationException e) {
                 Context context = getApplicationContext();
                 CharSequence text = "Incorrect username/password";
@@ -135,6 +142,53 @@ public class MainActivity extends ActionBarActivity {
         RHAList rhas = new RHAList("this is ghetto");
         if(rhas.contains(username))
             isRha=true;
+//
+//        HttpRequest r = new HttpRequest.get("", data=json.dumps({'netid': 'arb11'}), headers=headers)
+//        if r.text = 'True':
+
+
+        try {
+            String url = "http://abraunstein.pythonanywhere.com/api/rhacheck/";
+
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+            // optional default is GET
+            con.setRequestMethod("GET");
+
+//            //add request headerNT);
+//            con.setRequestProperty("User-Agent", USER_AGE
+
+            int responseCode = con.getResponseCode();
+            System.out.println("\nSending 'GET' request to URL : " + url);
+            Log.v("MainACtivity JSON GET Request","\nSending 'GET' request to URL : " + url);
+            System.out.println("Response Code : " + responseCode);
+
+
+            Log.v("MainACtivity JSON GET Request", "Response Code : " + responseCode);
+
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            //print result
+            System.out.println(response.toString());
+
+            Log.v("MainACtivity JSON GET Request", "Response  : " + response.toString());
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         LinearLayout rl = (LinearLayout) findViewById(R.id.mainScreenLayout);
         rl.removeView(findViewById(R.id.netidField));
         rl.removeView(findViewById(R.id.passwordField));
