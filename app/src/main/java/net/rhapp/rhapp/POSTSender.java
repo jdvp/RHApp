@@ -1,9 +1,7 @@
 package net.rhapp.rhapp;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,6 +18,7 @@ import java.net.URL;
 public class POSTSender extends AsyncTask<String, Integer, String> {
 
 
+    // Sends a message (NOT a request!)
     public String sendMessage(String netidFrom, String netidTo, String message, boolean anon) throws IOException {
 
         // {'netid_from': ___, 'netid_to': ___, 'message': ___, 'anon': ___(boolean, 1 is yes) }
@@ -68,6 +67,13 @@ public class POSTSender extends AsyncTask<String, Integer, String> {
 
         return responseSB.toString();
 
+    }
+
+
+    // Sends a request (not just a message!!)
+    public String sendRequest(String[] params) {
+        // TODO
+        return "";
     }
 
     @Override

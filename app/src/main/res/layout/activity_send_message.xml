@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textMultiLine"
                 android:ems="10"
-                android:id="@+id/editText2"
+                android:id="@+id/msg"
                 android:phoneNumber="false"
                 android:hint="@string/enter_message_prompt"
                 android:gravity="start|top" />

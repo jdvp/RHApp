@@ -14,13 +14,11 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/sender_name" android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/unresolved"/>
+            android:id="@+id/sender_name" android:layout_alignParentTop="true"/>
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:id="@+id/msg_stub" android:layout_below="@+id/sender_name"
-            android:layout_toLeftOf="@+id/unresolved"
             android:singleLine="true"/>
 </RelativeLayout>

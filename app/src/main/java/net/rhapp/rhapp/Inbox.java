@@ -105,6 +105,7 @@ public class Inbox extends ActionBarActivity {
 
     public void goToList () {
         Intent inboxIntent = new Intent(this, RHAList.class);
+        inboxIntent.putExtra("netid", user);
         startActivity(inboxIntent);
     }
 }

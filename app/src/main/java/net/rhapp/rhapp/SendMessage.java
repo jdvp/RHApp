@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,7 +75,13 @@ public class SendMessage extends ActionBarActivity {
     public void sendMessage(View view) {
         String response = "";
 
-        String[] params = {"jnd2", "abc0", "this is a message", String.valueOf(isAnon)};
+        // get message text
+        EditText msg   = (EditText)findViewById(R.id.msg);
+        String msgText = msg.getText().toString();
+
+        // set params
+        String[] params = {user, "abc0", msgText, String.valueOf(isAnon)};
+
         try {
             response = new POSTSender().execute(params).get();
         } catch (Exception e) {

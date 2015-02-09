@@ -166,11 +166,13 @@ public class RHAList extends ActionBarActivity {
 
     public void goToInbox () {
         Intent inboxIntent = new Intent(this, Inbox.class);
+        inboxIntent.putExtra("netid", user);
         startActivity(inboxIntent);
     }
 
     public void goToInbox (View view) {
         Intent inboxIntent = new Intent(this, Inbox.class);
+        inboxIntent.putExtra("netid", user);
         startActivity(inboxIntent);
     }
 
