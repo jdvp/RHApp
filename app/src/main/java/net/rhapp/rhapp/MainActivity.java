@@ -187,7 +187,16 @@ public class MainActivity extends ActionBarActivity {
         catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+    public void logOut(){
+        logIn = false;
+        username = "";
+
+        setContentView(R.layout.activity_main);
+    }
+
+    public void nextPage(){
 
         LinearLayout rl = (LinearLayout) findViewById(R.id.mainScreenLayout);
         rl.removeView(findViewById(R.id.netidField));
@@ -221,7 +230,7 @@ public class MainActivity extends ActionBarActivity {
                 if(isRha)
                     loginAsRHA(v);
                 else
-                    nextPage();
+                    goToRHAList();
             }
         });
 
@@ -232,16 +241,11 @@ public class MainActivity extends ActionBarActivity {
         rl.addView(buttonConsole);
 
         welcome.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.BOTTOM);
+
     }
 
-    public void logOut(){
-        logIn = false;
-        username = "";
 
-        setContentView(R.layout.activity_main);
-    }
-
-    public void nextPage(){
+    private void goToRHAList () {
         Intent RHAListIntent = new Intent(this, RHAList.class);
         RHAListIntent.putExtra("netid", username);
         startActivity(RHAListIntent);

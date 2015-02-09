@@ -75,9 +75,7 @@ public class POSTSender extends AsyncTask<String, Integer, String> {
 
         String response = "";
         try {
-
             response = sendMessage(params[0], params[1], params[2], Boolean.parseBoolean(params[3]));
-
         } catch (IOException e) {
             e.printStackTrace();
             response = "";
