@@ -18,8 +18,8 @@ import java.util.concurrent.ExecutionException;
 
 public class SendMessage extends ActionBarActivity {
 
-    String user;
-    boolean isAnon;
+    private String user;
+    private boolean isAnon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -16,11 +16,11 @@ import java.util.ArrayList;
 
 public class Inbox extends ActionBarActivity {
 
-    ListView msgList;
-    ArrayList<String> names;
-    ArrayList<String> msgs;
-    ArrayList<Boolean> resolved, anon;
-    String user;
+    private ListView msgList;
+    private ArrayList<String> names;
+    private ArrayList<String> msgs;
+    private ArrayList<Boolean> resolved, anon;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
